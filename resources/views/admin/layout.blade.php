@@ -7,76 +7,169 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{csrf_token()}}">
     <link rel="stylesheet" href="{{ asset('/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/adminlte/css/adminlte.min.css')}}">
     <link href="{{ asset('/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/sweetalert2.css') }}" rel="stylesheet">
     <script src="{{ asset('/js/sweetalert2.min.js')}}"></script>
     <title>Document</title>
     @yield('css')
 </head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img src="{{ asset('/assets/icon/logo.png') }}" width="30" height="30" alt="">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/dashboard">Dashboard</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-expanded="false">
-                        Master Pengguna
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/admin">Admin</a>
-                        <a class="dropdown-item" href="/member">Member</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-expanded="false">
-                        Master Data
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/category">Kategori</a>
-                        <a class="dropdown-item" href="/barang">Barang</a>
-                    </div>
-                </li>
-            </ul>
-            <div class="d-flex">
-                <a href="/logout" class="btn btn-outline-light">Keluar</a>
-            </div>
-        </div>
-    </div>
+<body class="hold-transition sidebar-mini layout-fixed">
+<nav class="main-header navbar navbar-expand elevation-1">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link navbar-link-item" data-widget="pushmenu" href="#" role="button"><i
+                    class="fa fa-bars"></i></a>
+        </li>
+    </ul>
+    <div class="font-weight-bold">Sistem Reservasi Bengkel</div>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a href="/logout" class="nav-link navbar-link-item">Logout</a>
+        </li>
+    </ul>
 </nav>
-<div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 0;">
-    <div class="toast d-none" style="position: fixed; top: 0; right: 0; z-index: 99999" data-autohide="true"
-         data-delay="8000">
-        <div class="toast-header">
-            <img src="" class="rounded mr-2" alt="">
-            <strong class="mr-auto" id="toast-title"></strong>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="toast-body" id="toast-message">
+<aside class="main-sidebar sidebar-dark-primary elevation-1">
+    <div class="sidebar">
+        <a href="/" class="brand-link">
+            <img src="{{ asset('assets/icon/logo.png') }}"
+                 alt="AdminLTE Logo"
+                 class="brand-image"
+            >
+            <span class="brand-text font-weight-light">Laravel</span>
+        </a>
+        <div class="my-sidebar-menu">
+            <ul class="nav nav-sidebar nav-pills flex-column">
+                <nav class="mt-2 nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <li class="nav-item">
+                        <a href="/"
+                           class="nav-link">
+                            <i class="fa fa-tachometer nav-icon" aria-hidden="true"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li class="nav-header" style="padding: 0.5rem 1rem 0.5rem 1rem;">
+                        Master Data
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-users"></i>
+                            <p>
+                                Pengguna
+                                <i class="right fa fa-angle-down"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/admin"
+                                   class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
+                                    <p>Admin</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/member"
+                                   class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
+                                    <p>Member</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-database"></i>
+                            <p>
+                                Data
+                                <i class="right fa fa-angle-down"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/layanan"
+                                   class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
+                                    <p>Layanan Servis</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/paket"
+                                   class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
+                                    <p>Paket</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-briefcase"></i>
+                            <p>
+                                Transaksi
+                                <i class="right fa fa-angle-down"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/reservasi"
+                                   class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
+                                    <p>Pesanan Baru</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-bar-chart"></i>
+                            <p>
+                                Laporan
+                                <i class="right fa fa-angle-down"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/laporan-penyewaan"
+                                   class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
+                                    <p>Penyewaan</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/laporan-barang-terlaris"
+                                   class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
+                                    <p>Barang Terlaris</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/laporan-stock"
+                                   class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
+                                    <p>Stock Barang</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </nav>
+            </ul>
         </div>
     </div>
+</aside>
+<div class="content-wrapper p-3">
+    @yield('content-title')
+    @yield('content')
 </div>
-@yield('content')
 <script src="{{ asset('/jQuery/jquery-3.4.1.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
 <script src="{{ asset('/bootstrap/js/bootstrap.js') }}"></script>
+<script src="{{ asset ('/adminlte/js/adminlte.js') }}"></script>
 <script src="{{ asset('/datatables/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('/datatables/dataTables.bootstrap4.min.js') }}"></script>
 @yield('js')

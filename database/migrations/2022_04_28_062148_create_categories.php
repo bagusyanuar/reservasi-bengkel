@@ -17,6 +17,7 @@ class CreateCategories extends Migration
             $table->id();
             $table->string('nama');
             $table->text('deskripsi');
+            $table->integer('harga')->default(0);
             $table->timestamps();
         });
     }

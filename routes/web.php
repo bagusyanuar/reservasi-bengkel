@@ -42,21 +42,21 @@ Route::group(['prefix' => 'member'], function () {
     Route::post( '/delete', [\App\Http\Controllers\Admin\MemberController::class, 'destroy']);
 });
 
-Route::group(['prefix' => 'category'], function () {
-    Route::get( '/', [\App\Http\Controllers\Admin\CategoryController::class, 'index']);
-    Route::get( '/tambah', [\App\Http\Controllers\Admin\CategoryController::class, 'add_page']);
-    Route::post( '/create', [\App\Http\Controllers\Admin\CategoryController::class, 'create']);
-    Route::get( '/edit/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'edit_page']);
-    Route::post( '/patch', [\App\Http\Controllers\Admin\CategoryController::class, 'patch']);
-    Route::post( '/delete', [\App\Http\Controllers\Admin\CategoryController::class, 'destroy']);
+Route::group(['prefix' => 'layanan'], function () {
+    Route::get( '/', [\App\Http\Controllers\Admin\LayananController::class, 'index']);
+    Route::get( '/tambah', [\App\Http\Controllers\Admin\LayananController::class, 'add_page']);
+    Route::post( '/create', [\App\Http\Controllers\Admin\LayananController::class, 'create']);
+    Route::get( '/edit/{id}', [\App\Http\Controllers\Admin\LayananController::class, 'edit_page']);
+    Route::post( '/patch', [\App\Http\Controllers\Admin\LayananController::class, 'patch']);
+    Route::post( '/delete', [\App\Http\Controllers\Admin\LayananController::class, 'destroy']);
 });
-
-Route::group(['prefix' => 'barang'], function () {
-    Route::get( '/', [\App\Http\Controllers\Admin\BarangController::class, 'index']);
-    Route::get( '/tambah', [\App\Http\Controllers\Admin\BarangController::class, 'add_page']);
-    Route::post( '/create', [\App\Http\Controllers\Admin\BarangController::class, 'create']);
-    Route::get( '/edit/{id}', [\App\Http\Controllers\Admin\BarangController::class, 'edit_page']);
-    Route::post( '/patch', [\App\Http\Controllers\Admin\BarangController::class, 'patch']);
-    Route::post( '/delete', [\App\Http\Controllers\Admin\BarangController::class, 'destroy']);
-});
+//
+//Route::group(['prefix' => 'barang'], function () {
+//    Route::get( '/', [\App\Http\Controllers\Admin\BarangController::class, 'index']);
+//    Route::get( '/tambah', [\App\Http\Controllers\Admin\BarangController::class, 'add_page']);
+//    Route::post( '/create', [\App\Http\Controllers\Admin\BarangController::class, 'create']);
+//    Route::get( '/edit/{id}', [\App\Http\Controllers\Admin\BarangController::class, 'edit_page']);
+//    Route::post( '/patch', [\App\Http\Controllers\Admin\BarangController::class, 'patch']);
+//    Route::post( '/delete', [\App\Http\Controllers\Admin\BarangController::class, 'destroy']);
+//});
 

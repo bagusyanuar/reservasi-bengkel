@@ -18,9 +18,9 @@
             <div class="col-lg-2">
                 <p class="font-weight-bold">Kategori</p>
                 <ul class="list-group">
-                    @foreach($categories as $category)
+                    @foreach($paket as $v)
                         <a href="/">
-                            <li class="list-group-item">{{ $category->nama }}</li>
+                            <li class="list-group-item">{{ $v->nama }}</li>
                         </a>
                     @endforeach
                 </ul>
@@ -39,19 +39,19 @@
 
                 <div class="panel-product" id="panel-product">
                     <div class="row">
-                        @foreach($data as $v)
-                            <div class="col-lg-3 col-md-4 mb-4">
-                                <div class="card card-item" data-id="{{ $v->id }}" style="cursor: pointer">
-                                    <img class="card-img-top" src="{{ asset('/assets/barang'). "/" . $v->gambar }}"
-                                         alt="Card image cap" height="150">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $v->nama }}</h5>
-                                        <p class="card-text">Rp. {{ $v->harga }}</p>
-                                        <a href="#" class="btn btn-sm btn-primary">Tambah Keranjang</a>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+{{--                        @foreach($data as $v)--}}
+{{--                            <div class="col-lg-3 col-md-4 mb-4">--}}
+{{--                                <div class="card card-item" data-id="{{ $v->id }}" style="cursor: pointer">--}}
+{{--                                    <img class="card-img-top" src="{{ asset('/assets/barang'). "/" . $v->gambar }}"--}}
+{{--                                         alt="Card image cap" height="150">--}}
+{{--                                    <div class="card-body">--}}
+{{--                                        <h5 class="card-title">{{ $v->nama }}</h5>--}}
+{{--                                        <p class="card-text">Rp. {{ $v->harga }}</p>--}}
+{{--                                        <a href="#" class="btn btn-sm btn-primary">Tambah Keranjang</a>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        @endforeach--}}
                     </div>
                 </div>
             </div>
