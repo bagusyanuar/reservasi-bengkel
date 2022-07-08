@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Helper\CustomController;
+use App\Models\Layanan;
+use App\Models\Paket;
+use Illuminate\Support\Facades\DB;
 
 class PaketController extends CustomController
 {
@@ -15,45 +18,54 @@ class PaketController extends CustomController
 
     public function index()
     {
-        $data = Category::all();
-        return view('admin.data.category.index')->with(['data' => $data]);
+        $data = Paket::with('layanan')->get();
+//        return $data->toArray();
+        return view('admin.data.paket.index')->with(['data' => $data]);
     }
 
     public function add_page()
     {
-        return view('admin.data.category.add');
+        $layanan = Layanan::all();
+        return view('admin.data.paket.add')->with(['layanan' => $layanan]);
     }
 
     public function create()
     {
         try {
+            DB::beginTransaction();
             $data = [
                 'nama' => $this->postField('nama'),
+                'harga' => $this->postField('harga'),
+                'deskripsi' => $this->postField('deskripsi'),
             ];
-            Category::create($data);
+            $layanan = $this->postField('layanan');
+            $paket = Paket::create($data);
+            $paket->layanan()->attach($layanan);
+            DB::commit();
             return redirect()->back()->with(['success' => 'Berhasil Menambahkan Data...']);
         } catch (\Exception $e) {
+            DB::rollBack();
             return redirect()->back()->with(['failed' => 'Terjadi Kesalahan ' . $e->getMessage()]);
         }
     }
 
     public function edit_page($id)
     {
-        $data = Category::findOrFail($id);
-        return view('admin.data.category.edit')->with(['data' => $data]);
+        $data = Paket::findOrFail($id);
+        return view('admin.data.paket.edit')->with(['data' => $data]);
     }
 
     public function patch()
     {
         try {
             $id = $this->postField('id');
-            $category = Category::find($id);
+            $category = Paket::find($id);
             $data = [
                 'nama' => $this->postField('nama'),
             ];
 
             $category->update($data);
-            return redirect('/category')->with(['success' => 'Berhasil Merubah Data...']);
+            return redirect('/paket')->with(['success' => 'Berhasil Merubah Data...']);
         } catch (\Exception $e) {
             return redirect()->back()->with(['failed' => 'Terjadi Kesalahan' . $e->getMessage()]);
         }
@@ -63,7 +75,7 @@ class PaketController extends CustomController
     {
         try {
             $id = $this->postField('id');
-            Category::destroy($id);
+            Paket::destroy($id);
             return $this->jsonResponse('success', 200);
         } catch (\Exception $e) {
             return $this->jsonResponse('failed', 500);

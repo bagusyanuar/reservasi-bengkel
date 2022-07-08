@@ -19,7 +19,7 @@ class Paket extends Model
 
     public function layanan()
     {
-//        return $this->hasMany(Layanan::class, '')
+        return $this->belongsToMany(Layanan::class, 'paket_layanan');
     }
 
 }
