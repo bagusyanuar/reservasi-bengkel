@@ -59,6 +59,12 @@ Route::group(['prefix' => 'paket'], function () {
     Route::post( '/patch', [\App\Http\Controllers\Admin\PaketController::class, 'patch']);
     Route::post( '/delete', [\App\Http\Controllers\Admin\PaketController::class, 'destroy']);
 });
+
+Route::group(['prefix' => 'penerimaan-reservasi'], function () {
+    Route::get( '/', [\App\Http\Controllers\Admin\ReservasiController::class, 'index']);
+    Route::get( '/detail/{id}', [\App\Http\Controllers\Admin\ReservasiController::class, 'detail']);
+    Route::post( '/patch', [\App\Http\Controllers\Admin\ReservasiController::class, 'patch']);
+});
 //
 //Route::group(['prefix' => 'barang'], function () {
 //    Route::get( '/', [\App\Http\Controllers\Admin\BarangController::class, 'index']);

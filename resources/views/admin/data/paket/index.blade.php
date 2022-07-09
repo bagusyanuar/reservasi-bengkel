@@ -32,6 +32,7 @@
                     <th>Nama</th>
                     <th>Harga (Rp.)</th>
                     <th>Layanan</th>
+                    <th>Tipe</th>
                     <th>Deskripsi</th>
                     <th width="20%" class="text-center">Action</th>
                 </tr>
@@ -42,19 +43,20 @@
                         <td width="5%" class="text-center">{{ $loop->index + 1 }}</td>
                         <td>{{ $v->nama }}</td>
                         <td>{{ $v->harga }}</td>
+
                         <td>
                             @forelse($v->layanan as $vl)
                                 <div>- {{$vl->nama}}</div>
                             @empty
                                 <span>-</span>
                             @endforelse
-{{--                            @php--}}
-{{--                                $layanan = '';--}}
-{{--                                foreach ($v->layanan as $l) {--}}
-{{--                                    $layanan .= $l->nama.', ';--}}
-{{--                                }--}}
-{{--                            @endphp--}}
-{{--                            <span>{{ $layanan }}</span>--}}
+                        </td>
+                        <td>
+                            @if($v->tipe == 'datang')
+                                <span>Datang Ke Bengkel</span>
+                            @else
+                                <span>Jemput Ke Lokasi Pelanggan</span>
+                            @endif
                         </td>
                         <td>{{ $v->deskripsi }}</td>
                         <td class="text-center">
@@ -76,7 +78,7 @@
     <script src="{{ asset('/js/helper.js') }}"></script>
     <script type="text/javascript">
         function destroy(id) {
-            AjaxPost('/layanan/delete', {id}, function () {
+            AjaxPost('/paket/delete', {id}, function () {
                 window.location.reload();
             });
         }

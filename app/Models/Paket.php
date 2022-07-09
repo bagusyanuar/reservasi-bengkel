@@ -14,7 +14,8 @@ class Paket extends Model
     protected $fillable = [
         'nama',
         'deskripsi',
-        'harga'
+        'harga',
+        'tipe'
     ];
 
     public function layanan()

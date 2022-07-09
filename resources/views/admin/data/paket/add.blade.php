@@ -77,9 +77,16 @@
                                     </select>
                                 </div>
                                 <div class="w-100 mb-1">
-                                    <label for="harga" class="form-label">Harga Layanan</label>
-                                    <input type="number" class="form-control" id="harga" placeholder="Harga Layanan"
+                                    <label for="harga" class="form-label">Harga Paket</label>
+                                    <input type="number" class="form-control" id="harga" placeholder="Harga Paket"
                                            name="harga" value="0">
+                                </div>
+                                <div class="form-group w-100 mb-1">
+                                    <label for="tipe">Tipe Paket</label>
+                                    <select class="form-control" id="tipe" name="tipe">
+                                        <option value="datang">Datang Ke Bengkel</option>
+                                        <option value="jemput">Jemput Ke Lokasi Pelanggan</option>
+                                    </select>
                                 </div>
                                 <div class="w-100 mb-1">
                                     <label for="deskripsi" class="form-label">Deskripsi</label>
