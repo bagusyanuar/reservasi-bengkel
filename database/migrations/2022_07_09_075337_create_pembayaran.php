@@ -20,7 +20,7 @@ class CreatePembayaran extends Migration
             $table->integer('total')->default(0);
             $table->text('bukti')->nullable();
             $table->timestamps();
-            $table->foreign('reservasi_id')->references('id')->on('reservasi');
+            $table->foreign('reservasi_id')->references('id')->on('penerimaan-reservasi');
         });
     }
 

@@ -35,4 +35,9 @@ class Reservasi extends Model
     {
         return $this->hasOne(Pembayaran::class, 'reservasi_id');
     }
+
+    public function tambahan()
+    {
+        return $this->hasMany(ReservasiTambahan::class, 'reservasi_id');
+    }
 }

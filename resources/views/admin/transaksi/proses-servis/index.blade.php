@@ -11,12 +11,12 @@
     @endif
     <div class="container-fluid pt-3">
         <div class="d-flex align-items-center justify-content-between mb-3">
-            <p class="font-weight-bold mb-0" style="font-size: 20px">Halaman Daftar Reservasi</p>
+            <p class="font-weight-bold mb-0" style="font-size: 20px">Halaman Daftar Proses Servis</p>
             <ol class="breadcrumb breadcrumb-transparent mb-0">
                 <li class="breadcrumb-item">
                     <a href="/dashboard">Dashboard</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Daftar Reservasi
+                <li class="breadcrumb-item active" aria-current="page">Daftar Proses Servis
                 </li>
             </ol>
         </div>
@@ -43,7 +43,7 @@
                         <td>{{ $v->paket->nama }}</td>
                         <td>{{ $v->status }}</td>
                         <td class="text-center">
-                            <a href="/reservasi/detail/{{ $v->id }}" class="btn btn-sm btn-info btn-edit"
+                            <a href="/proses-servis/detail/{{ $v->id }}" class="btn btn-sm btn-info btn-edit"
                                data-id="{{ $v->id }}"><i class="fa fa-info"></i></a>
                         </td>
                     </tr>

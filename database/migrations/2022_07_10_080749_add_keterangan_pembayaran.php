@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddKeteranganReservasi extends Migration
+class AddKeteranganPembayaran extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class AddKeteranganReservasi extends Migration
      */
     public function up()
     {
-        Schema::table('penerimaan-reservasi', function (Blueprint $table) {
-            $table->dropColumn('dp');
-            $table->text('keterangan')->after('status')->default('');
+        Schema::table('pembayaran', function (Blueprint $table) {
+            $table->enum('jenis', ['dp', 'pelunasan'])->default('dp')->after('status');
+            $table->text('keterangan')->after('jenis');
         });
     }
 
@@ -26,8 +26,8 @@ class AddKeteranganReservasi extends Migration
      */
     public function down()
     {
-        Schema::table('penerimaan-reservasi', function (Blueprint $table) {
-            $table->integer('dp')->default(0);
+        Schema::table('pembayaran', function (Blueprint $table) {
+            $table->dropColumn('jenis');
             $table->dropColumn('keterangan');
         });
     }

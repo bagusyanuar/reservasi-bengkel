@@ -80,3 +80,7 @@ function DataTableGenerator(element, url = '/', col = [], colDef = [], data = fu
     let config = {...baseConfig, ...extConfig};
     return $(element).DataTable(config);
 }
+
+function formatUang(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}

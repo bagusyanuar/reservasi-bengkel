@@ -115,10 +115,38 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
+                                <a href="/penerimaan-reservasi"
+                                   class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
+                                    <p>Penerimaan Reservasi</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="/reservasi"
                                    class="nav-link">
                                     <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
-                                    <p>Pesanan Baru</p>
+                                    <p>Reservasi</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/proses-servis"
+                                   class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
+                                    <p>Proses Servis</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/selesai-servis"
+                                   class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
+                                    <p>Selesai Servis</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/reservasi-selesai"
+                                   class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
+                                    <p>Selesai</p>
                                 </a>
                             </li>
                         </ul>

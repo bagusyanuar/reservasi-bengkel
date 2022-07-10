@@ -11,12 +11,12 @@
     @endif
     <div class="container-fluid pt-3">
         <div class="d-flex align-items-center justify-content-between mb-3">
-            <p class="font-weight-bold mb-0" style="font-size: 20px">Halaman Daftar Reservasi</p>
+            <p class="font-weight-bold mb-0" style="font-size: 20px">Halaman Penerimaan Reservasi</p>
             <ol class="breadcrumb breadcrumb-transparent mb-0">
                 <li class="breadcrumb-item">
                     <a href="/dashboard">Dashboard</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Daftar Reservasi
+                <li class="breadcrumb-item active" aria-current="page">Penerimaan Reservasi
                 </li>
             </ol>
         </div>
@@ -30,7 +30,7 @@
                     <th>Customer</th>
                     <th>Paket</th>
                     <th>Status</th>
-                    <th width="12%" class="text-center">Action</th>
+                    <th width="20%" class="text-center">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -43,7 +43,7 @@
                         <td>{{ $v->paket->nama }}</td>
                         <td>{{ $v->status }}</td>
                         <td class="text-center">
-                            <a href="/reservasi/detail/{{ $v->id }}" class="btn btn-sm btn-info btn-edit"
+                            <a href="/penerimaan-reservasi/detail/{{ $v->id }}" class="btn btn-sm btn-info btn-edit"
                                data-id="{{ $v->id }}"><i class="fa fa-info"></i></a>
                         </td>
                     </tr>

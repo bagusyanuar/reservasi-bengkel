@@ -13,7 +13,7 @@ class CreateReservasi extends Migration
      */
     public function up()
     {
-        Schema::create('reservasi', function (Blueprint $table) {
+        Schema::create('penerimaan-reservasi', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->date('tanggal');
@@ -35,6 +35,6 @@ class CreateReservasi extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reservasi');
+        Schema::dropIfExists('penerimaan-reservasi');
     }
 }

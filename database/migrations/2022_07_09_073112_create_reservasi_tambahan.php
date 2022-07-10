@@ -19,7 +19,7 @@ class CreateReservasiTambahan extends Migration
             $table->bigInteger('layanan_id')->unsigned();
             $table->integer('harga');
             $table->timestamps();
-            $table->foreign('reservasi_id')->references('id')->on('reservasi');
+            $table->foreign('reservasi_id')->references('id')->on('penerimaan-reservasi');
             $table->foreign('layanan_id')->references('id')->on('layanan');
         });
     }

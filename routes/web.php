@@ -65,6 +65,27 @@ Route::group(['prefix' => 'penerimaan-reservasi'], function () {
     Route::get( '/detail/{id}', [\App\Http\Controllers\Admin\ReservasiController::class, 'detail']);
     Route::post( '/patch', [\App\Http\Controllers\Admin\ReservasiController::class, 'patch']);
 });
+
+Route::group(['prefix' => 'reservasi'], function () {
+    Route::get( '/', [\App\Http\Controllers\Admin\ReservasiController::class, 'reservasi']);
+    Route::get( '/detail/{id}', [\App\Http\Controllers\Admin\ReservasiController::class, 'detail_reservasi']);
+    Route::post( '/patch', [\App\Http\Controllers\Admin\ReservasiController::class, 'patch_reservasi']);
+});
+
+Route::group(['prefix' => 'proses-servis'], function () {
+    Route::get( '/', [\App\Http\Controllers\Admin\ReservasiController::class, 'servis']);
+    Route::get( '/detail/{id}', [\App\Http\Controllers\Admin\ReservasiController::class, 'detail_servis']);
+    Route::get( '/data/{id}', [\App\Http\Controllers\Admin\ReservasiController::class, 'layanan_tambahan_data']);
+    Route::post( '/tambah-layanan', [\App\Http\Controllers\Admin\ReservasiController::class, 'layanan_tambahan_tambah']);
+    Route::post( '/hapus-layanan', [\App\Http\Controllers\Admin\ReservasiController::class, 'layanan_tambahan_hapus']);
+    Route::post( '/patch', [\App\Http\Controllers\Admin\ReservasiController::class, 'patch_servis']);
+});
+
+Route::group(['prefix' => 'selesai-servis'], function () {
+    Route::get( '/', [\App\Http\Controllers\Admin\ReservasiController::class, 'servis_selesai']);
+    Route::get( '/detail/{id}', [\App\Http\Controllers\Admin\ReservasiController::class, 'detail_servis_selesai']);
+    Route::post( '/patch', [\App\Http\Controllers\Admin\ReservasiController::class, 'patch_servis']);
+});
 //
 //Route::group(['prefix' => 'barang'], function () {
 //    Route::get( '/', [\App\Http\Controllers\Admin\BarangController::class, 'index']);
