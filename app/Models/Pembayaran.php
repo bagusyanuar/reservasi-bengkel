@@ -13,9 +13,13 @@ class Pembayaran extends Model
 
     protected $fillable = [
         'reservasi_id',
+        'tanggal',
         'bank',
         'total',
-        'bukti'
+        'bukti',
+        'status',
+        'jenis',
+        'keterangan',
     ];
 
     public function reservasi()

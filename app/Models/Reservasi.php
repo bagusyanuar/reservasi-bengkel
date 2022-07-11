@@ -33,11 +33,25 @@ class Reservasi extends Model
 
     public function pembayaran_lunas()
     {
-        return $this->hasOne(Pembayaran::class, 'reservasi_id');
+        return $this->hasOne(Pembayaran::class, 'reservasi_id')->where('jenis', '=', 'dp');
     }
 
     public function tambahan()
     {
         return $this->hasMany(ReservasiTambahan::class, 'reservasi_id');
+    }
+
+    public function dp()
+    {
+        return $this->hasMany(Pembayaran::class, 'reservasi_id')
+            ->where('jenis', '=', 'dp')
+            ->where('status', '=', 'terima');
+    }
+
+    public function pelunasan()
+    {
+        return $this->hasMany(Pembayaran::class, 'reservasi_id')
+            ->where('jenis', '=', 'pelunasan')
+            ->where('status', '=', 'terima');
     }
 }

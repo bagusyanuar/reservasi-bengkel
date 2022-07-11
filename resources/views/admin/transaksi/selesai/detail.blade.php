@@ -126,7 +126,7 @@
                             </div>
                             <hr>
                             <div class="d-flex align-items-center">
-                                <span class="font-weight-bold w-50">Kekurangan</span>
+                                <span class="font-weight-bold w-50">Pelunasan</span>
                                 <div class="font-weight-bold w-50 d-flex justify-content-between">
                                     <span>:</span>
                                     <span class="text-right" id="lbl-kurang">Rp. 0</span>
@@ -135,16 +135,12 @@
                         </div>
                     </div>
                     <div class="mt-3">
-                        <form action="/selesai-servis/patch" method="post">
-                            @csrf
-                            <input type="hidden" name="id" value="{{ $data->id }}">
-                            <div class="text-right">
-                                <button type="submit" class="btn btn-success text-right">
-                                    <i class="fa fa-save"></i>
-                                    <span>Simpan</span>
-                                </button>
-                            </div>
-                        </form>
+                        <div class="text-right">
+                            <a target="_blank" href="/reservasi-selesai/nota/{{ $data->id }}" class="btn btn-success text-right">
+                                <i class="fa fa-print mr-2"></i>
+                                <span>Cetak</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

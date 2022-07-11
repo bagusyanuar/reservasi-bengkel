@@ -84,7 +84,25 @@ Route::group(['prefix' => 'proses-servis'], function () {
 Route::group(['prefix' => 'selesai-servis'], function () {
     Route::get( '/', [\App\Http\Controllers\Admin\ReservasiController::class, 'servis_selesai']);
     Route::get( '/detail/{id}', [\App\Http\Controllers\Admin\ReservasiController::class, 'detail_servis_selesai']);
-    Route::post( '/patch', [\App\Http\Controllers\Admin\ReservasiController::class, 'patch_servis']);
+    Route::post( '/patch', [\App\Http\Controllers\Admin\ReservasiController::class, 'patch_servis_selesai']);
+});
+
+Route::group(['prefix' => 'reservasi-selesai'], function () {
+    Route::get( '/', [\App\Http\Controllers\Admin\ReservasiController::class, 'selesai']);
+    Route::get( '/detail/{id}', [\App\Http\Controllers\Admin\ReservasiController::class, 'detail_selesai']);
+    Route::get( '/nota/{id}', [\App\Http\Controllers\Admin\ReservasiController::class, 'cetak_nota']);
+});
+
+Route::group(['prefix' => 'laporan-reservasi'], function () {
+    Route::get( '/', [\App\Http\Controllers\Admin\LaporanController::class, 'laporan_reservasi']);
+    Route::get( '/data', [\App\Http\Controllers\Admin\LaporanController::class, 'laporan_reservasi_data']);
+    Route::get( '/cetak', [\App\Http\Controllers\Admin\LaporanController::class, 'laporan_reservasi_cetak']);
+});
+
+Route::group(['prefix' => 'laporan-pembayaran'], function () {
+    Route::get( '/', [\App\Http\Controllers\Admin\LaporanController::class, 'laporan_pembayaran']);
+    Route::get( '/data', [\App\Http\Controllers\Admin\LaporanController::class, 'laporan_pembayaran_data']);
+    Route::get( '/cetak', [\App\Http\Controllers\Admin\LaporanController::class, 'laporan_pembayaran_cetak']);
 });
 //
 //Route::group(['prefix' => 'barang'], function () {

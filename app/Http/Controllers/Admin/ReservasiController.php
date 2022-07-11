@@ -23,7 +23,7 @@ class ReservasiController extends CustomController
     public function index()
     {
         $data = Reservasi::with(['pembayaran_lunas', 'user.member', 'paket'])->whereHas('pembayaran_lunas', function ($q) {
-            return $q->where('total', '>', 0)
+            return $q->where('jenis', '=', 'dp')
                 ->where('status', '=', 'menunggu');
         })
             ->where('status', '=', 'reservasi')
@@ -34,7 +34,7 @@ class ReservasiController extends CustomController
     public function detail($id)
     {
         $data = Reservasi::with(['pembayaran_lunas', 'user.member', 'paket'])->whereHas('pembayaran_lunas', function ($q) {
-            return $q->where('total', '>', 0)
+            return $q->where('jenis', '=', 'dp')
                 ->where('status', '=', 'menunggu');
         })
             ->where('status', '=', 'reservasi')
@@ -189,15 +189,62 @@ class ReservasiController extends CustomController
     public function patch_servis_selesai()
     {
         try {
+            DB::beginTransaction();
             $id = $this->postField('id');
-            $reservasi = Reservasi::find($id);
+            $reservasi = Reservasi::with(['pembayaran_lunas', 'tambahan'])->find($id);
             $data = [
-                'status' => 'selesai-servis',
+                'status' => 'selesai',
             ];
             $reservasi->update($data);
-            return redirect('/proses-servis')->with(['success' => 'Berhasil Merubah Data...']);
+            $dp = $reservasi->pembayaran_lunas->total;
+            $total = $reservasi->total;
+            $tambahan = $reservasi->tambahan->sum('total');
+            $kekurangan = $total + $tambahan - $dp;
+
+            $data_pelunasan = [
+                'reservasi_id' => $reservasi->id,
+                'bank' => 'CASH',
+                'total' => $kekurangan,
+                'bukti' => null,
+                'status' => 'terima',
+                'jenis' => 'pelunasan',
+                'keterangan' => 'Pelunasan Reservasi',
+            ];
+
+            Pembayaran::create($data_pelunasan);
+            DB::commit();
+            return redirect('/selesai-servis')->with(['success' => 'Berhasil Merubah Data...']);
         } catch (\Exception $e) {
+            DB::rollBack();
             return redirect()->back()->with(['failed' => 'Terjadi Kesalahan' . $e->getMessage()]);
         }
+    }
+
+    public function selesai()
+    {
+        $data = Reservasi::with(['user.member', 'paket'])
+            ->where('status', '=', 'selesai')
+            ->get();
+        return view('admin.transaksi.selesai.index')->with(['data' => $data]);
+    }
+
+    public function detail_selesai($id)
+    {
+        $data = Reservasi::with(['user.member', 'paket.layanan', 'tambahan', 'pembayaran_lunas'])
+            ->where('status', '=', 'selesai')
+            ->findOrFail($id);
+        $layanan = Layanan::all();
+        return view('admin.transaksi.selesai.detail')->with(['data' => $data, 'layanan' => $layanan]);
+    }
+
+    public function cetak_nota($id)
+    {
+        $data = Reservasi::with(['user.member', 'paket.layanan', 'tambahan.layanan', 'pembayaran_lunas', 'dp', 'pelunasan'])
+            ->where('status', '=', 'selesai')
+            ->findOrFail($id);
+        $html = view('admin.transaksi.selesai.nota')->with(['data' => $data]);
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($html)->setPaper('a5', 'landscape');
+        return $pdf->stream();
     }
 }

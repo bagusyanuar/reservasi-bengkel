@@ -161,24 +161,17 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="/laporan-penyewaan"
+                                <a href="/laporan-reservasi"
                                    class="nav-link">
                                     <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
-                                    <p>Penyewaan</p>
+                                    <p>Reservasi</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/laporan-barang-terlaris"
+                                <a href="/laporan-pembayaran"
                                    class="nav-link">
                                     <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
-                                    <p>Barang Terlaris</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/laporan-stock"
-                                   class="nav-link">
-                                    <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
-                                    <p>Stock Barang</p>
+                                    <p>Pembayaran</p>
                                 </a>
                             </li>
                         </ul>
