@@ -1,62 +1,55 @@
 @extends('member.layout')
 
 @section('content')
-    <div class="banner-container">
-        <div class="your-class" style="width: 100%">
-            <img src="{{ asset('/assets/icon/banner-1.jpg') }}" alt="Gambar Banner" class="banner-item">
-            <img src="{{ asset('/assets/icon/banner-2.webp') }}" alt="Gambar Banner" class="banner-item">
-            <img src="{{ asset('/assets/icon/banner-3.jpg') }}" alt="Gambar Banner" class="banner-item">
-        </div>
-        <div class="banner-text-container">
-            <div class="d-flex justify-content-center align-items-center" style="height: 300px">
-                <p class="banner-text" style="opacity: 1">Selamat Datang Web Di E-Commerce </p>
-            </div>
-        </div>
+    <img src="{{ asset('/assets/icon/banner5.png') }}" style="width: 100%;">
+    <div class="text-center mt-3 mb-3">
+        <p class="font-weight-bold" style="font-size: 16px; letter-spacing: 1px; color: #535961">Temukan Paket Layanan
+            Servis Sesuai Kebutuhan Anda</p>
     </div>
-    <div class="pl-5 pl-5 pt-2 pb-2 mt-3">
-        <div class="row w-100">
-            <div class="col-lg-2">
-                <p class="font-weight-bold">Kategori</p>
-                <ul class="list-group">
-                    @foreach($paket as $v)
-                        <a href="/">
-                            <li class="list-group-item">{{ $v->nama }}</li>
-                        </a>
-                    @endforeach
-                </ul>
-            </div>
-            <div class="col-lg-10">
-                <div class="d-flex mb-3">
-                    <div class="flex-grow-1 mr-2">
-                        <input type="text" class="form-control" id="filter" placeholder="Cari Nama barang"
-                               name="filter">
-                    </div>
-                    <div>
-                        <a href="#" class="btn btn-primary" id="btn-search"><i
-                                class="fa fa-search mr-1"></i><span>Cari</span></a>
+    <div class="text-center mt-3 mb-3">
+        <p class="font-weight-bold" style="font-size: 24px; letter-spacing: 1px; color: #535961">Paket Servis Di Bengkel
+            Kami</p>
+    </div>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            @foreach($paket as $v)
+                <div class="col-lg-3 col-md-4">
+                    <div class="card card-item" style="cursor: pointer; height: 400px; border-color: #376477">
+                        <div class="card-body">
+                            <h5 class="card-title mb-2 card-text-title font-weight-bold"
+                                style="color: #535961">{{$v->nama}}</h5>
+                            <p style="color: #535961; font-size: 12px">{{ $v->deskripsi }}</p>
+                            <p class="card-text" style="color: #376477; font-weight: bold; font-size: 18px">
+                                Rp. {{ number_format($v->harga, 0, ',', '.') }}</p>
+                            <a href="/product/{{ $v->id }}/detail" data-id="{{ $v->id }}"
+                               class="btn-order d-flex justify-content-center align-items-center">
+                                <span class="font-weight-bold">Pilih Paket</span>
+                            </a>
+                            <div class="mt-3">
+                                <p class="font-weight-bold" style="color: #535961; font-size: 14px">Layanan Servis</p>
+                                @forelse($v->layanan as $v)
+                                    <div style="color: #535961; font-size: 14px">- {{ $v->nama }}</div>
+                                @empty
+                                    <span style="color: #535961; font-size: 14px">
+                                        Kamu Bisa Memilih Layanan Sendiri
+                                    </span>
+                                @endforelse
+                            </div>
+                            <div class="mt-3" style="color: #535961; font-size: 12px">catatang :
+                                @if($v->tipe === 'datang')
+                                    <span>Customer Datang Ke Bengkel</span>
+                                @else
+                                    <span>Customer Mengirimkan Alamat Lokasi Pengambilan Unit</span>
+                                @endif
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div class="panel-product" id="panel-product">
-                    <div class="row">
-{{--                        @foreach($data as $v)--}}
-{{--                            <div class="col-lg-3 col-md-4 mb-4">--}}
-{{--                                <div class="card card-item" data-id="{{ $v->id }}" style="cursor: pointer">--}}
-{{--                                    <img class="card-img-top" src="{{ asset('/assets/barang'). "/" . $v->gambar }}"--}}
-{{--                                         alt="Card image cap" height="150">--}}
-{{--                                    <div class="card-body">--}}
-{{--                                        <h5 class="card-title">{{ $v->nama }}</h5>--}}
-{{--                                        <p class="card-text">Rp. {{ $v->harga }}</p>--}}
-{{--                                        <a href="#" class="btn btn-sm btn-primary">Tambah Keranjang</a>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        @endforeach--}}
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
+    <div style="height: 100px"></div>
+    <div class="footer"></div>
 @endsection
 
 @section('js')

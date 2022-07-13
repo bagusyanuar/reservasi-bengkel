@@ -21,6 +21,8 @@ Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'ind
 
 
 Route::get('/product/{id}/detail', [\App\Http\Controllers\Member\HomepageController::class, 'product_page']);
+Route::post('/product/add/layanan', [\App\Http\Controllers\Member\HomepageController::class, 'add_layanan']);
+Route::post('/product/hapus/layanan', [\App\Http\Controllers\Member\HomepageController::class, 'delete_layanan']);
 Route::get('/product/data', [\App\Http\Controllers\Member\ProductController::class, 'get_product_by_name']);
 
 

@@ -38,6 +38,7 @@ class PaketController extends CustomController
                 'harga' => $this->postField('harga'),
                 'deskripsi' => $this->postField('deskripsi'),
                 'tipe' => $this->postField('tipe'),
+                'jenis' => $this->postField('jenis'),
             ];
             $layanan = $this->postField('layanan');
             $paket = Paket::create($data);
@@ -73,6 +74,7 @@ class PaketController extends CustomController
                 'harga' => $this->postField('harga'),
                 'deskripsi' => $this->postField('deskripsi'),
                 'tipe' => $this->postField('tipe'),
+                'jenis' => $this->postField('jenis'),
             ];
             $paket->update($data);
             $layanan = $this->postField('layanan');

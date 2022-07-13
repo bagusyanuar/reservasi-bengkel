@@ -15,7 +15,8 @@ class Paket extends Model
         'nama',
         'deskripsi',
         'harga',
-        'tipe'
+        'tipe',
+        'jenis',
     ];
 
     public function layanan()

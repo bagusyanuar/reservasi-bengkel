@@ -15,7 +15,7 @@ class CreateReservasiTambahan extends Migration
     {
         Schema::create('reservasi_tambahan', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('reservasi_id')->unsigned();
+            $table->bigInteger('reservasi_id')->unsigned()->nullable();
             $table->bigInteger('layanan_id')->unsigned();
             $table->integer('harga');
             $table->timestamps();

@@ -33,6 +33,7 @@
                     <th>Harga (Rp.)</th>
                     <th>Layanan</th>
                     <th>Tipe</th>
+                    <th>Jenis</th>
                     <th>Deskripsi</th>
                     <th width="20%" class="text-center">Action</th>
                 </tr>
@@ -58,6 +59,7 @@
                                 <span>Jemput Ke Lokasi Pelanggan</span>
                             @endif
                         </td>
+                        <td>{{ $v->jenis }}</td>
                         <td>{{ $v->deskripsi }}</td>
                         <td class="text-center">
                             <a href="/paket/edit/{{ $v->id }}" class="btn btn-sm btn-warning btn-edit"

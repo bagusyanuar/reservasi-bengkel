@@ -117,6 +117,35 @@
     color: white;
 }
 
+.btn-order {
+    border-radius: 20px;
+    border: solid 1px #376477;
+    padding: 5px 20px;
+    text-align: center;
+    color: #376477;
+}
+
+.btn-order-basic {
+    border-radius: 20px;
+    border: solid 1px #376477;
+    padding: 10px 20px;
+    text-align: center;
+    color: whitesmoke;
+    background-color: #376477;
+}
+
+.btn-order:hover {
+    background-color: #376477;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-order-basic:hover {
+    background-color: whitesmoke;
+    color: #376477;
+    text-decoration: none;
+}
+
 .card-text-stock{
     font-size: 12px;
     color: #7e888b;
@@ -159,4 +188,10 @@
     color: white;
     font-size: 8px;
     text-align: center;
+}
+
+.footer {
+    height: 200px;
+    width: 100%;
+    background-color: #376477;
 }

@@ -88,6 +88,13 @@
                                         <option value="jemput">Jemput Ke Lokasi Pelanggan</option>
                                     </select>
                                 </div>
+                                <div class="form-group w-100 mb-1">
+                                    <label for="jenis">Jenis Paket</label>
+                                    <select class="form-control" id="jenis" name="jenis">
+                                        <option value="basic">Basic</option>
+                                        <option value="custom">Custom</option>
+                                    </select>
+                                </div>
                                 <div class="w-100 mb-1">
                                     <label for="deskripsi" class="form-label">Deskripsi</label>
                                     <textarea type="text" class="form-control" id="deskripsi" placeholder="Deskripsi"
