@@ -71,8 +71,8 @@
                         <div class="card-body">
                             <p class="font-weight-bold">Bukti Pembayaran</p>
                             <a target="_blank"
-                               href="{{ asset('assets/bukti')."/".$data->bukti }}">
-                                <img src="{{  asset('assets/bukti')."/".$data->bukti }}" alt="Gambar Produk"
+                               href="{{ asset('assets/bukti')."/".$data->pembayaran_lunas->bukti }}">
+                                <img src="{{  asset('assets/bukti')."/".$data->pembayaran_lunas->bukti }}" alt="Gambar Produk"
                                      style="width: 185px; height: 185px; object-fit: cover">
                             </a>
                         </div>
@@ -88,9 +88,9 @@
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $data->id }}">
                                 <div class="form-group w-100 mb-1">
-                                    <label for="status">Status Penerimaan</label>
+                                    <label for="status">Status Pembayaran</label>
                                     <select class="form-control" id="status" name="status">
-                                        <option value="menunggu">Menunggu</option>
+                                        <option value="terima">Terima</option>
                                         <option value="tolak">Tolak</option>
                                     </select>
                                 </div>

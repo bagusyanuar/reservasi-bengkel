@@ -71,6 +71,12 @@ return [
             'url' => env('APP_URL') . '/public',
             'visibility' => 'public',
         ],
+        'bukti' => [
+            'driver' => 'local',
+            'root' => public_path() . '/assets/bukti',
+            'url' => env('APP_URL') . '/public',
+            'visibility' => 'public',
+        ],
 
     ],
 

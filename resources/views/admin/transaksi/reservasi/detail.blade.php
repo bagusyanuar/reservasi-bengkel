@@ -77,6 +77,12 @@
                                 <td>{{ $v->nama }}</td>
                             </tr>
                         @endforeach
+                        @foreach($data->tambahan as $t)
+                            <tr>
+                                <td width="5%" class="text-center">{{ $loop->index + 1 }}</td>
+                                <td>{{ $t->layanan->nama }}</td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                     <div class="mt-3">

@@ -27,16 +27,16 @@
                             </a>
                             <div class="mt-3">
                                 <p class="font-weight-bold" style="color: #535961; font-size: 14px">Layanan Servis</p>
-                                @forelse($v->layanan as $v)
-                                    <div style="color: #535961; font-size: 14px">- {{ $v->nama }}</div>
+                                @forelse($v->layanan as $l)
+                                    <div style="color: #535961; font-size: 14px">- {{ $l->nama }}</div>
                                 @empty
                                     <span style="color: #535961; font-size: 14px">
                                         Kamu Bisa Memilih Layanan Sendiri
                                     </span>
                                 @endforelse
                             </div>
-                            <div class="mt-3" style="color: #535961; font-size: 12px">catatang :
-                                @if($v->tipe === 'datang')
+                            <div class="mt-3" style="color: #535961; font-size: 12px">catatan :
+                                @if($v->tipe == 'datang')
                                     <span>Customer Datang Ke Bengkel</span>
                                 @else
                                     <span>Customer Mengirimkan Alamat Lokasi Pengambilan Unit</span>

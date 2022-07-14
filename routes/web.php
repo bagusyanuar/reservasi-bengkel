@@ -24,7 +24,9 @@ Route::get('/product/{id}/detail', [\App\Http\Controllers\Member\HomepageControl
 Route::post('/product/add/layanan', [\App\Http\Controllers\Member\HomepageController::class, 'add_layanan']);
 Route::post('/product/hapus/layanan', [\App\Http\Controllers\Member\HomepageController::class, 'delete_layanan']);
 Route::get('/product/data', [\App\Http\Controllers\Member\ProductController::class, 'get_product_by_name']);
-
+Route::post('/product/checkout', [\App\Http\Controllers\Member\HomepageController::class, 'checkout']);
+Route::match(['post', 'get'],'/pembayaran/{id}/detail', [\App\Http\Controllers\Member\PembayaranController::class, 'detail']);
+Route::get('/transaksi', [\App\Http\Controllers\Member\TransaksiController::class, 'index']);
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get( '/', [\App\Http\Controllers\Admin\AdminController::class, 'index']);

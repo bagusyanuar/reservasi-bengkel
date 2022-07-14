@@ -9,7 +9,11 @@ use App\Models\Barang;
 use App\Models\Category;
 use App\Models\Layanan;
 use App\Models\Paket;
+use App\Models\Reservasi;
 use App\Models\ReservasiTambahan;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomepageController extends CustomController
 {
@@ -30,12 +34,13 @@ class HomepageController extends CustomController
     {
         $data = Paket::with('layanan')->findOrFail($id);
         $layanan = Layanan::all();
-        $tambahan = ReservasiTambahan::with(['user', 'reservasi', 'layanan'])
-            ->where('user_id', '=', 2)
-            ->whereNull('reservasi_id')
-            ->get();
+        $tambahan = [];
         $total_tambahan = $data->harga;
-        if($data->jenis === 'custom') {
+        if ($data->jenis === 'custom' && Auth::check()) {
+            $tambahan = ReservasiTambahan::with(['user', 'reservasi', 'layanan'])
+                ->where('user_id', '=', Auth::id())
+                ->whereNull('reservasi_id')
+                ->get();
             foreach ($tambahan as $t) {
                 $total_tambahan += $t->harga;
             }
@@ -46,10 +51,13 @@ class HomepageController extends CustomController
     public function add_layanan()
     {
         try {
+            if (!Auth::check()) {
+                return $this->jsonResponse('Silahkan Login Terlebih Dahulu', 202);
+            }
             $layanan_id = $this->postField('layanan');
             $layanan = Layanan::find($layanan_id);
             $data = [
-                'user_id' => 2,
+                'user_id' => Auth::id(),
                 'reservasi_id' => null,
                 'layanan_id' => $layanan_id,
                 'qty' => 1,
@@ -57,7 +65,7 @@ class HomepageController extends CustomController
             ];
             ReservasiTambahan::create($data);
             return $this->jsonResponse('success', 200);
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             return $this->jsonResponse('failed ' . $e->getMessage(), 500);
         }
     }
@@ -68,13 +76,42 @@ class HomepageController extends CustomController
             $id = $this->postField('id');
             ReservasiTambahan::destroy($id);
             return $this->jsonResponse('success', 200);
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             return $this->jsonResponse('failed ' . $e->getMessage(), 500);
         }
     }
 
     public function checkout()
     {
-
+        try {
+            if (!Auth::check()) {
+                return $this->jsonResponse('Silahkan Login Terlebih Dahulu', 202);
+            }
+            $id = $this->postField('id');
+            DB::beginTransaction();
+            $paket = Paket::find($id);
+            $no_reservasi = 'RS-' . \date('YmdHis');
+            $data_reservasi = [
+                'user_id' => Auth::id(),
+                'tanggal' => Carbon::now(),
+                'no_reservasi' => $no_reservasi,
+                'paket_id' => $paket->id,
+                'status' => 'reservasi',
+                'total' => $paket->harga,
+                'keterangan' => $this->postField('keterangan'),
+            ];
+            $reservasi = Reservasi::create($data_reservasi);
+            $tambahan = ReservasiTambahan::with(['user', 'reservasi', 'layanan'])
+                ->where('user_id', '=', Auth::id())
+                ->whereNull('reservasi_id')
+                ->get();
+            foreach ($tambahan as $t) {
+                $t->update(['reservasi_id' => $reservasi->id]);
+            }
+            DB::commit();
+            return $this->jsonResponse('success', 200);
+        }catch (\Exception $e) {
+            return $this->jsonResponse('failed ' . $e->getMessage(), 500);
+        }
     }
 }

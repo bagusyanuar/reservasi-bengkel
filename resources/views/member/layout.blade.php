@@ -32,7 +32,7 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="{{ asset('/assets/icon/brand-logo.png') }}" width="30" height="30" alt="">
-            <span>Marketplace</span>
+            <span>Bengkel Solo</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,8 +61,8 @@
                     </a>
                 @endguest
                 @auth()
-                    <a href="/cart" class="navbar-item f-12">
-                        <i class="fa fa-shopping-cart mr-2"></i>
+                    <a href="/transaksi" class="navbar-item f-12">
+                        <i class="fa fa-briefcase mr-2"></i>
                     </a>
                     <a href="/logout" class="navbar-item f-12 ml-3">
                         <i class="fa fa-power-off mr-1"></i>

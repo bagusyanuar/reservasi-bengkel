@@ -27,11 +27,15 @@ function AlertConfirm(title = 'Apakah Anda Yakin?', text = 'Apa anda yakin melan
 }
 
 async function AjaxPost(url, param = {}, onSuccess = function () {
+}, onAccepted = function () {
+
 }) {
     try {
         let response = await $.post(url, param);
         if (response['status'] === 200) {
             onSuccess();
+        } else {
+            onAccepted();
         }
     } catch (e) {
         ErrorAlert('Error', e.responseText.toString());

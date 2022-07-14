@@ -57,54 +57,67 @@
                                 </div>
                             @endforeach
                         @else
-                            <div class="row">
-                                <div class="col-lg-8 col-md-6">
-                                    <div class="form-group w-100">
-                                        <label for="layanan">Layanan</label>
-                                        <select class="select2" name="layanan" id="layanan" style="width: 100%;">
-                                            <option value="">--Pilih Layanan--</option>
-                                            @foreach($layanan as $l)
-                                                <option value="{{ $l->id }}"
-                                                        data-harga="{{ $l->harga }}">{{ $l->nama }}</option>
-                                            @endforeach
-                                        </select>
+                            @auth
+                                <div class="row">
+                                    <div class="col-lg-8 col-md-6">
+                                        <div class="form-group w-100">
+                                            <label for="layanan">Layanan</label>
+                                            <select class="select2" name="layanan" id="layanan" style="width: 100%;">
+                                                <option value="">--Pilih Layanan--</option>
+                                                @foreach($layanan as $l)
+                                                    <option value="{{ $l->id }}"
+                                                            data-harga="{{ $l->harga }}">{{ $l->nama }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="w-100 mb-1">
+                                            <label for="harga" class="form-label">Harga</label>
+                                            <input type="number" class="form-control" id="harga" placeholder="Harga"
+                                                   name="harga" value="0" readonly="readonly">
+                                        </div>
+                                        <div class="w-100 mb-2 mt-2 text-right">
+                                            <a href="#" id="btn-add" class="btn btn-success"><i
+                                                    class="fa fa-plus mr-2"></i>Tambah</a>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-md-6">
-                                    <div class="w-100 mb-1">
-                                        <label for="harga" class="form-label">Harga</label>
-                                        <input type="number" class="form-control" id="harga" placeholder="Harga"
-                                               name="harga" value="0" readonly="readonly">
-                                    </div>
-                                    <div class="w-100 mb-2 mt-2 text-right">
-                                        <a href="#" id="btn-add" class="btn btn-success"><i class="fa fa-plus mr-2"></i>Tambah</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <table id="table-data" class="display w-100 table table-bordered">
-                                <thead>
-                                <tr>
-                                    <th width="5%" class="text-center">#</th>
-                                    <th>Nama Layanan</th>
-                                    <th width="15%">Harga</th>
-                                    <th width="12%" class="text-center">Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($tambahan as $t)
+                                <hr>
+                                <table id="table-data" class="display w-100 table table-bordered">
+                                    <thead>
                                     <tr>
-                                        <td width="5%" class="text-center">{{ $loop->index + 1 }}</td>
-                                        <td>{{ $t->layanan->nama }}</td>
-                                        <td>{{ number_format($t->layanan->harga, 0, ',', '.') }}</td>
-                                        <td class="text-center">
-                                            <a href="#" class="btn btn-sm btn-danger btn-delete" data-id="{{ $t->id }}"><i
-                                                    class="fa fa-trash"></i></a>
-                                        </td>
+                                        <th width="5%" class="text-center">#</th>
+                                        <th>Nama Layanan</th>
+                                        <th width="15%">Harga</th>
+                                        <th width="12%" class="text-center">Action</th>
                                     </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($tambahan as $t)
+                                        <tr>
+                                            <td width="5%" class="text-center">{{ $loop->index + 1 }}</td>
+                                            <td>{{ $t->layanan->nama }}</td>
+                                            <td>{{ number_format($t->layanan->harga, 0, ',', '.') }}</td>
+                                            <td class="text-center">
+                                                <a href="#" class="btn btn-sm btn-danger btn-delete"
+                                                   data-id="{{ $t->id }}"><i
+                                                        class="fa fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            @endauth
+                            @guest
+                                <p style="color: #535961; font-size: 14px">
+                                    Kamu bisa menambah jenis layanan yang kamu inginkan setelah kamu melakukan login. <a
+                                        href="/login-member" class="font-weight-bold"
+                                        style="color: #535961; font-size: 14px">
+                                        Login Sekarang
+                                    </a>
+                                </p>
+                            @endguest
                         @endif
                     </div>
                 </div>
@@ -115,6 +128,13 @@
                         <p class="font-weight-bold mb-0" style="color: whitesmoke; font-size: 18px">Total Layanan</p>
                     </div>
                     <div class="card-body">
+                        @if($data->tipe == 'jemput')
+                            <div class="w-100 mb-2">
+                                <label for="keterangan" class="form-label">Lokasi Pengambilan</label>
+                                <textarea rows="3" class="form-control" id="keterangan" placeholder="Lokasi Pengambilan"
+                                          name="keterangan"></textarea>
+                            </div>
+                        @endif
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="w-50">
                                 <span class="font-weight-bold" style="color: #376477">Total</span>
@@ -134,10 +154,12 @@
                         </div>
                     </div>
                 </div>
-                <a href="#"
-                   class="btn-order-basic d-flex justify-content-center align-items-center" style="height: 60px">
-                    <span class="font-weight-bold">Pesan sekarang</span>
-                </a>
+                @auth
+                    <a id="btn-pesan" href="#"
+                       class="btn-order-basic d-flex justify-content-center align-items-center" style="height: 60px">
+                        <span class="font-weight-bold">Pesan sekarang</span>
+                    </a>
+                @endauth
             </div>
 
 
@@ -152,10 +174,20 @@
     <script src="{{ asset('/adminlte/plugins/select2/select2.full.js') }}"></script>
     <script>
         var jenis = '{{ $data->jenis }}';
+        var id = '{{ $data->id }}'
 
         function destroy(id) {
             AjaxPost('/product/hapus/layanan', {id}, function () {
                 window.location.reload();
+            });
+        }
+
+        function pesan() {
+            AjaxPost('/product/checkout', {
+                id: id,
+                keterangan: $('#keterangan').val()
+            }, function () {
+                window.location.href = '/';
             });
         }
 
@@ -165,7 +197,9 @@
             });
 
             if (jenis === 'custom') {
-                $('#table-data').DataTable();
+                $('#table-data').DataTable({
+                    dom: 'ltipr',
+                });
             }
 
             $('#layanan').on('change', function () {
@@ -179,6 +213,8 @@
                     layanan: $('#layanan').val()
                 }, function () {
                     window.location.reload();
+                }, function () {
+                    ErrorAlert('Error', 'Silahkan Login Terlebih Dahulu');
                 });
             });
 
@@ -188,6 +224,11 @@
                 AlertConfirm('Apakah anda yakin menghapus layanan?', 'Data yang dihapus tidak dapat dikembalikan!', function () {
                     destroy(id);
                 })
+            });
+
+            $('#btn-pesan').on('click', function (e) {
+                e.preventDefault();
+                pesan();
             });
         });
     </script>

@@ -49,12 +49,12 @@ class ReservasiController extends CustomController
             $id = $this->postField('id');
             $reservasi = Reservasi::find($id);
             $data = [
-                'status' => $this->postField('status'),
+                'status' => $this->postField('status') === 'terima' ? 'menunggu' : 'tolak',
             ];
             $reservasi->update($data);
             $pembayaran = Pembayaran::where('reservasi_id', '=', $id);
             $pembayaran->update([
-                'status' => $this->postField('status') === 'menunggu' ? 'terima' : 'tolak'
+                'status' => $this->postField('status')
             ]);
             DB::commit();
             return redirect('/penerimaan-reservasi')->with(['success' => 'Berhasil Merubah Data...']);
@@ -74,7 +74,7 @@ class ReservasiController extends CustomController
 
     public function detail_reservasi($id)
     {
-        $data = Reservasi::with(['user.member', 'paket.layanan'])
+        $data = Reservasi::with(['user.member', 'paket.layanan', 'tambahan.layanan'])
             ->where('status', '=', 'menunggu')
             ->findOrFail($id);
         return view('admin.transaksi.reservasi.detail')->with(['data' => $data]);
