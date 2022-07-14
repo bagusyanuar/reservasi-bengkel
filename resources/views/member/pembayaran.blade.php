@@ -40,7 +40,10 @@
     <div class="container-fluid mt-2" style="padding-left: 50px; padding-right: 50px; padding-top: 10px;">
         <ol class="breadcrumb breadcrumb-transparent mb-2">
             <li class="breadcrumb-item">
-                <a href="/dashboard">Dashboard</a>
+                <a href="/">Beranda</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="/transaksi">Transaksi</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">Pembayaran
             </li>
@@ -114,7 +117,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="card card-item mb-3" style="cursor: pointer; border-color: #376477">
                     <div class="card-header" style="background-color: #376477 ">
-                        <p class="font-weight-bold mb-0" style="color: whitesmoke; font-size: 18px">Pembayaran DP</p>
+                        <p class="font-weight-bold mb-0" style="color: whitesmoke; font-size: 18px">Pembayaran</p>
                     </div>
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
@@ -135,16 +138,16 @@
                                 </div>
                             </div>
                         </div>
-                        @if($data->pembayaran_lunas != null)
+                        @if(count($data->dp) > 0 || count($data->pelunasan) > 0)
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="w-50">
-                                    <span class="font-weight-bold" style="color: #376477">DP</span>
+                                    <span class="font-weight-bold" style="color: #376477">Di Bayar</span>
                                 </div>
                                 <div class="w-50">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <span class="font-weight-bold" style="color: #376477">:</span>
                                         <span class="font-weight-bold"
-                                              style="color: #376477">Rp. {{ number_format($data->pembayaran_lunas->total, 0, ',', '.') }}</span>
+                                              style="color: #376477">Rp. {{ number_format($data->dp->sum('total') + $data->pelunasan->sum('total'), 0, ',', '.') }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +159,7 @@
                                     <div class="d-flex justify-content-between align-items-center">
                                         <span class="font-weight-bold" style="color: #376477">:</span>
                                         <span class="font-weight-bold"
-                                              style="color: #376477">Rp. {{ number_format($data->total + $total_tambahan - $data->pembayaran_lunas->total, 0, ',', '.') }}</span>
+                                              style="color: #376477">Rp. {{ number_format($data->total + $total_tambahan - ($data->dp->sum('total') + $data->pelunasan->sum('total')), 0, ',', '.') }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -207,7 +210,32 @@
                                 @elseif($data->status == 'menunggu')
                                     <p class="font-weight-bold"
                                        style="color: #535961; font-size: 14px; text-align: justify">
-                                        NB: Pembayaran anda sudah kami terima. {{ $data->paket->tipe == 'jemput' ? 'Mohon menunggu mekanik kami akan datang ke lokasi anda' : 'Silahkan datang ke bengkel untuk melakukan proses servis' }} .
+                                        NB: Pembayaran anda sudah kami
+                                        terima. {{ $data->paket->tipe == 'jemput' ? 'Mohon menunggu mekanik kami akan datang ke lokasi anda' : 'Silahkan datang ke bengkel untuk melakukan proses servis' }}
+                                        dan Cetak Nota untuk menunjukan proses transaksi sudah sah.
+                                    </p>
+                                    <a href="/pembayaran/{{ $data->id }}/nota" target="_blank" id="btn-nota"
+                                       class="btn-order-basic d-flex justify-content-center align-items-center w-100 mt-3"
+                                       style="height: 60px">
+                                        <span class="font-weight-bold">
+                                            <i class="fa fa-print mr-2"></i>Cetak Nota
+                                        </span>
+                                    </a>
+                                @elseif($data->status == 'proses')
+                                    <p class="font-weight-bold"
+                                       style="color: #535961; font-size: 14px; text-align: justify">
+                                        NB: Reservasi servis anda sedang kami proses
+                                    </p>
+                                @elseif($data->status == 'selesai-servis')
+                                    <p class="font-weight-bold"
+                                       style="color: #535961; font-size: 14px; text-align: justify">
+                                        NB: Proses servis anda sudah selesai. Silahkan Melakukan pelunasan pembayaran
+                                        apabila masih ada kekurangan.
+                                    </p>
+                                @elseif($data->status == 'selesai')
+                                    <p class="font-weight-bold"
+                                       style="color: #535961; font-size: 14px; text-align: justify">
+                                        NB: Proses Reservasi anda telah selesai. Terima kasih telah menggunakan jasa kami.
                                     </p>
                                 @endif
                             @endif
@@ -216,11 +244,8 @@
                 </div>
 
             </div>
-
-
         </div>
     </div>
-    <div class="footer"></div>
 @endsection
 
 @section('js')

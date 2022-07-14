@@ -132,7 +132,7 @@
                             <th width="12%">Action</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody></tbody>
                     </table>
                     <hr>
                     <div class="row">

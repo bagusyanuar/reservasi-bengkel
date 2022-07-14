@@ -10,7 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/bootstrap/css/bootstrap.min.css') }}">
     <link href="{{ asset('/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
@@ -28,7 +30,8 @@
     @yield('css')
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark" style="height: 75px; background-color: #376477; box-shadow: none !important;">
+<nav class="navbar navbar-expand-lg navbar-dark"
+     style="height: 75px; background-color: #376477; box-shadow: none !important;">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="{{ asset('/assets/icon/brand-logo.png') }}" width="30" height="30" alt="">
@@ -44,13 +47,10 @@
                     <a class="nav-link f-bold color-semi-white" aria-current="page" href="/">Beranda</a>
                 </li>
                 <li class="nav-item mr-1">
-                    <a class="nav-link f-bold color-semi-white" aria-current="page" href="/">Produk</a>
+                    <a class="nav-link f-bold color-semi-white" aria-current="page" href="/tentang">Tentang Kami</a>
                 </li>
                 <li class="nav-item mr-1">
-                    <a class="nav-link f-bold color-semi-white" aria-current="page" href="/">Tentang Kami</a>
-                </li>
-                <li class="nav-item mr-1">
-                    <a class="nav-link f-bold color-semi-white" aria-current="page" href="/">Hubungi Kami</a>
+                    <a class="nav-link f-bold color-semi-white" aria-current="page" href="/hubungi">Hubungi Kami</a>
                 </li>
             </ul>
             <div class="d-flex align-items-center">
@@ -90,6 +90,16 @@
     </div>
 </div>
 @yield('content')
+<div class="footer">
+    <div class="container-fluid p-3">
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <p class="font-weight-bold mb-1" style="color: whitesmoke">BENGKEL OKE</p>
+                <p style="color: whitesmoke">Jl. Adi Sumarmo No. 18, Manahan, Surakarta</p>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="{{ asset('/jQuery/jquery-3.4.1.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"

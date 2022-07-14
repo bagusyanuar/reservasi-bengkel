@@ -114,4 +114,14 @@ class HomepageController extends CustomController
             return $this->jsonResponse('failed ' . $e->getMessage(), 500);
         }
     }
+
+    public function about()
+    {
+        return view('member.tentang');
+    }
+
+    public function contact()
+    {
+        return view('member.hubungi');
+    }
 }

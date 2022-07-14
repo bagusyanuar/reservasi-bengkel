@@ -18,14 +18,17 @@ Route::match(['post', 'get'], '/register', [\App\Http\Controllers\AuthController
 Route::match(['post', 'get'], '/login-admin', [\App\Http\Controllers\AuthController::class, 'login']);
 Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
 Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index']);
-
+Route::get('/tentang', [\App\Http\Controllers\Member\HomepageController::class, 'about']);
+Route::get('/hubungi', [\App\Http\Controllers\Member\HomepageController::class, 'contact']);
 
 Route::get('/product/{id}/detail', [\App\Http\Controllers\Member\HomepageController::class, 'product_page']);
 Route::post('/product/add/layanan', [\App\Http\Controllers\Member\HomepageController::class, 'add_layanan']);
 Route::post('/product/hapus/layanan', [\App\Http\Controllers\Member\HomepageController::class, 'delete_layanan']);
 Route::get('/product/data', [\App\Http\Controllers\Member\ProductController::class, 'get_product_by_name']);
 Route::post('/product/checkout', [\App\Http\Controllers\Member\HomepageController::class, 'checkout']);
+Route::get('/pembayaran/{id}', [\App\Http\Controllers\Member\PembayaranController::class, 'index']);
 Route::match(['post', 'get'],'/pembayaran/{id}/detail', [\App\Http\Controllers\Member\PembayaranController::class, 'detail']);
+Route::get('/pembayaran/{id}/nota', [\App\Http\Controllers\Member\PembayaranController::class, 'nota']);
 Route::get('/transaksi', [\App\Http\Controllers\Member\TransaksiController::class, 'index']);
 
 Route::group(['prefix' => 'admin'], function () {

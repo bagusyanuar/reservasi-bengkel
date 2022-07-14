@@ -40,9 +40,9 @@
     <div class="container-fluid mt-2" style="padding-left: 50px; padding-right: 50px; padding-top: 10px;">
         <ol class="breadcrumb breadcrumb-transparent mb-2">
             <li class="breadcrumb-item">
-                <a href="/">Beranda</a>
+                <a href="/dashboard">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">Riwayat Reservasi
+            <li class="breadcrumb-item active" aria-current="page">Daftar Pembayaran Reservasi
             </li>
         </ol>
         <div class="w-100 row product-detail" style="min-height: 350px">
@@ -55,9 +55,11 @@
                     <tr>
                         <th width="5%" class="text-center">#</th>
                         <th>Tanggal</th>
-                        <th>No. Reservasi</th>
-                        <th>Paket</th>
+                        <th>Via</th>
+                        <th>Bukti</th>
                         <th>Total</th>
+                        <th>Jenis</th>
+                        <th>Keterangan</th>
                         <th>Status</th>
                         <th width="12%" class="text-center">Action</th>
                     </tr>
@@ -67,21 +69,21 @@
                         <tr>
                             <td width="5%" class="text-center">{{ $loop->index + 1 }}</td>
                             <td>{{ $v->tanggal }}</td>
-                            <td>{{ $v->no_reservasi }}</td>
-                            <td>{{ $v->paket->nama }}</td>
-                            @php
-                                $total_tambahan = 0;
-                                foreach ($v->tambahan as $dt) {
-                                    $total_tambahan += ($dt->qty * $dt->harga);
-                                }
-                            @endphp
-                            <td>{{ number_format($v->total + $total_tambahan, 0, ',', '.') }}</td>
-                            <td>{{ $v->status }}</td>
+                            <td>{{ $v->bank }}</td>
+                            <td>
+                                <a target="_blank"
+                                   href="{{ asset('assets/bukti')."/".$v->bukti }}">
+                                    <img src="{{  asset('assets/bukti')."/".$v->bukti }}" alt="Gambar Bukti"
+                                         style="width: 100px; height: 100px; object-fit: cover">
+                                </a>
+                            </td>
+                            <td>{{ number_format($v->total, 0, ',', '.') }}</td>
+                            <td>{{ ucwords($v->jenis) }}</td>
+                            <td>{{ ucwords($v->keterangan) }}</td>
+                            <td>{{ ucwords($v->status) }}</td>
                             <td class="text-center">
                                 <a href="/pembayaran/{{ $v->id }}/detail" class="btn btn-sm btn-info btn-edit"
                                    data-id="{{ $v->id }}"><i class="fa fa-info"></i></a>
-{{--                                <a href="/pembayaran/{{ $v->id }}/detail" class="btn btn-sm btn-success btn-edit"--}}
-{{--                                   data-id="{{ $v->id }}"><i class="fa fa-credit-card"></i></a>--}}
                             </td>
                         </tr>
                     @endforeach
@@ -90,6 +92,7 @@
             </div>
         </div>
     </div>
+    <div class="footer"></div>
 @endsection
 
 @section('js')

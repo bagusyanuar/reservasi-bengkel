@@ -49,7 +49,7 @@
         </div>
     </div>
     <div style="height: 100px"></div>
-    <div class="footer"></div>
+
 @endsection
 
 @section('js')
