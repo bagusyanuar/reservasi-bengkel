@@ -181,17 +181,29 @@
                                         <label for="bank" style="color: #535961; font-size: 18px">Bank</label>
                                         <select class="form-control" id="bank" name="bank" required>
                                             <option value="">--pilih bank--</option>
-                                            <option value="BCA">BRI</option>
-                                            <option value="BCA">BCA</option>
-                                            <option value="MANDIRI">MANDIRI</option>
+                                            <option value="BCA">BRI (8889282920)</option>
+                                            <option value="BCA">BCA (9928923884)</option>
+                                            <option value="MANDIRI">MANDIRI (9912389320)</option>
                                         </select>
                                     </div>
-                                    <div class="w-100 mb-1">
+                                    <div class="w-100 mb-2">
                                         <label for="bukti" class="form-label" style="color: #535961; font-size: 18px">Bukti
                                             Transfer</label>
                                         <input type="file" class="form-control-file" id="bukti"
                                                placeholder="Gambar Bukti"
                                                name="bukti" required>
+                                    </div>
+                                    <div class="w-100 mb-1">
+                                        <label for="no_rekening" class="form-label" style="color: #535961; font-size: 18px">No. Rekening</label>
+                                        <input type="number" class="form-control-file" id="no_rekening"
+                                               placeholder="No. Rekening"
+                                               name="no_rekening" required>
+                                    </div>
+                                    <div class="w-100 mb-1">
+                                        <label for="atas_nama" class="form-label" style="color: #535961; font-size: 18px">Atas Nama</label>
+                                        <input type="text" class="form-control-file" id="atas_nama"
+                                               placeholder="Atas Nama"
+                                               name="atas_nama" required>
                                     </div>
                                     <hr>
                                     <button id="btn-pesan" type="submit"

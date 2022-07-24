@@ -61,7 +61,8 @@ class HomepageController extends CustomController
                 'reservasi_id' => null,
                 'layanan_id' => $layanan_id,
                 'qty' => 1,
-                'harga' => $layanan->harga * 1
+                'harga' => $layanan->harga * 1,
+                'total' => $layanan->harga * 1
             ];
             ReservasiTambahan::create($data);
             return $this->jsonResponse('success', 200);
@@ -98,7 +99,7 @@ class HomepageController extends CustomController
                 'paket_id' => $paket->id,
                 'status' => 'reservasi',
                 'total' => $paket->harga,
-                'keterangan' => $this->postField('keterangan'),
+                'keterangan' => $this->postField('keterangan') ?? '',
             ];
             $reservasi = Reservasi::create($data_reservasi);
             $tambahan = ReservasiTambahan::with(['user', 'reservasi', 'layanan'])
@@ -109,7 +110,7 @@ class HomepageController extends CustomController
                 $t->update(['reservasi_id' => $reservasi->id]);
             }
             DB::commit();
-            return $this->jsonResponse('success', 200);
+            return $this->jsonResponse('success', 200, $reservasi->id);
         }catch (\Exception $e) {
             return $this->jsonResponse('failed ' . $e->getMessage(), 500);
         }

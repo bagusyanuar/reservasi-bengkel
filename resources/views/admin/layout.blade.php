@@ -46,7 +46,7 @@
             <ul class="nav nav-sidebar nav-pills flex-column">
                 <nav class="mt-2 nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <li class="nav-item">
-                        <a href="/"
+                        <a href="/dashboard"
                            class="nav-link">
                             <i class="fa fa-tachometer nav-icon" aria-hidden="true"></i>
                             <p>Dashboard</p>

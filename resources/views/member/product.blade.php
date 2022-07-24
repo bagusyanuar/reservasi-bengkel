@@ -182,13 +182,21 @@
             });
         }
 
-        function pesan() {
-            AjaxPost('/product/checkout', {
-                id: id,
-                keterangan: $('#keterangan').val()
-            }, function () {
-                window.location.href = '/';
-            });
+        async function pesan() {
+            try {
+                let response = await $.post('/product/checkout', {
+                    id: id,
+                    keterangan: $('#keterangan').val()
+                });
+                if (response['status'] === 200) {
+                    let id = response['payload'];
+                    window.location.href = '/pembayaran/' + id + '/detail';
+                } else {
+                    window.location.href = '/login';
+                }
+            } catch (e) {
+                ErrorAlert('Error', 'Terjadi Kesalahan')
+            }
         }
 
         $(document).ready(function () {

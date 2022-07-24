@@ -69,6 +69,15 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="card">
                         <div class="card-body">
+                            <p class="font-weight-bold">Detail Pembayaran</p>
+                            <div class="d-flex align-items-center mb-1">
+                                <span class="w-50 font-weight-bold">No. Rekening</span>
+                                <span class="w-50  font-weight-bold">: {{ $data->pembayaran_lunas->no_rekening }}</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-1">
+                                <span class="w-50 font-weight-bold">Atas Nama</span>
+                                <span class="w-50  font-weight-bold">: {{ $data->pembayaran_lunas->atas_nama }}</span>
+                            </div>
                             <p class="font-weight-bold">Bukti Pembayaran</p>
                             <a target="_blank"
                                href="{{ asset('assets/bukti')."/".$data->pembayaran_lunas->bukti }}">

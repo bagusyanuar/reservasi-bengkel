@@ -36,6 +36,8 @@ class PembayaranController extends CustomController
                 'tanggal' => Carbon::now(),
                 'reservasi_id' => $data->id,
                 'bank' => $bank,
+                'no_rekening' => $this->postField('no_rekening'),
+                'atas_nama' => $this->postField('atas_nama'),
                 'total' => $dp,
                 'status' => 'menunggu',
                 'jenis' => 'dp',

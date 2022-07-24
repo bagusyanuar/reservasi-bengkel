@@ -15,6 +15,8 @@ class Pembayaran extends Model
         'reservasi_id',
         'tanggal',
         'bank',
+        'no_rekening',
+        'atas_nama',
         'total',
         'bukti',
         'status',
