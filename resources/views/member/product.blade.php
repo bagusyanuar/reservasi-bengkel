@@ -34,7 +34,7 @@
     <div class="container-fluid mt-2" style="padding-left: 50px; padding-right: 50px; padding-top: 10px;">
         <ol class="breadcrumb breadcrumb-transparent mb-2">
             <li class="breadcrumb-item">
-                <a href="/dashboard">Dashboard</a>
+                <a href="/">Beranda</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">{{ $data->nama }}
             </li>
@@ -128,6 +128,18 @@
                         <p class="font-weight-bold mb-0" style="color: whitesmoke; font-size: 18px">Total Layanan</p>
                     </div>
                     <div class="card-body">
+                        <div class="form-group w-100 mb-1">
+                            <label for="jenis_kendaraan">Jenis Kendaraan</label>
+                            <select class="form-control" id="jenis_kendaraan" name="jenis_kendaraan">
+                                <option value="motor">Motor</option>
+                                <option value="mobil">Mobil</option>
+                            </select>
+                        </div>
+                        <div class="w-100 mb-1">
+                            <label for="plat" class="form-label">Plat Nomor</label>
+                            <input type="text" class="form-control" id="plat" placeholder="Plat Nomor"
+                                   name="plat">
+                        </div>
                         @if($data->tipe == 'jemput')
                             <div class="w-100 mb-2">
                                 <label for="keterangan" class="form-label">Lokasi Pengambilan</label>
@@ -135,6 +147,7 @@
                                           name="keterangan"></textarea>
                             </div>
                         @endif
+                        <hr>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="w-50">
                                 <span class="font-weight-bold" style="color: #376477">Total</span>
@@ -186,7 +199,9 @@
             try {
                 let response = await $.post('/product/checkout', {
                     id: id,
-                    keterangan: $('#keterangan').val()
+                    keterangan: $('#keterangan').val(),
+                    jenis_kendaraan: $('#jenis_kendaraan').val(),
+                    plat: $('#plat').val(),
                 });
                 if (response['status'] === 200) {
                     let id = response['payload'];

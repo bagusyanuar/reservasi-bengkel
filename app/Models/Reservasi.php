@@ -16,6 +16,8 @@ class Reservasi extends Model
         'tanggal',
         'no_reservasi',
         'paket_id',
+        'jenis_kendaraan',
+        'plat',
         'status',
         'total',
         'keterangan',

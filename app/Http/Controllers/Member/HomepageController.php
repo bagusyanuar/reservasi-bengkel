@@ -97,6 +97,8 @@ class HomepageController extends CustomController
                 'tanggal' => Carbon::now(),
                 'no_reservasi' => $no_reservasi,
                 'paket_id' => $paket->id,
+                'jenis_kendaraan' => $this->postField('jenis_kendaraan'),
+                'plat' => $this->postField('plat'),
                 'status' => 'reservasi',
                 'total' => $paket->harga,
                 'keterangan' => $this->postField('keterangan') ?? '',

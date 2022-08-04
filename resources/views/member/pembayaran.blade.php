@@ -138,6 +138,25 @@
                                 </div>
                             </div>
                         </div>
+                        <hr>
+                        @if($data->pembayaran_lunas == null)
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="w-50">
+                                    <span class="font-weight-bold" style="color: #376477">DP</span>
+                                </div>
+                                <div class="w-50">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="font-weight-bold" style="color: #376477">:</span>
+                                        @php
+                                            $total_pembayaran = $data->total + $total_tambahan;
+                                            $dp = (10 * $total_pembayaran) / 100;
+                                        @endphp
+                                        <span class="font-weight-bold"
+                                              style="color: #376477">Rp. {{ number_format($dp, 0, ',', '.') }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                         @if(count($data->dp) > 0 || count($data->pelunasan) > 0)
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="w-50">
@@ -164,17 +183,16 @@
                                 </div>
                             </div>
                         @endif
-                        <hr>
                         <div class="mt-2">
                             @if($data->pembayaran_lunas == null)
                                 <form method="post" enctype="multipart/form-data">
                                     @csrf
-                                    <div class="w-100 mb-1">
+                                    <div class="w-100 mb-1 d-none">
                                         <label for="dp" class="form-label" style="color: #535961; font-size: 18px">Jumlah
                                             DP</label>
-                                        <input type="number" class="form-control" id="dp"
+                                        <input type="hidden" class="form-control" id="dp"
                                                placeholder="Gambar Bukti"
-                                               value="0"
+                                               value="{{ $dp }}"
                                                name="dp" required>
                                     </div>
                                     <div class="form-group w-100 mt-2">
@@ -194,13 +212,15 @@
                                                name="bukti" required>
                                     </div>
                                     <div class="w-100 mb-1">
-                                        <label for="no_rekening" class="form-label" style="color: #535961; font-size: 18px">No. Rekening</label>
+                                        <label for="no_rekening" class="form-label"
+                                               style="color: #535961; font-size: 18px">No. Rekening</label>
                                         <input type="number" class="form-control-file" id="no_rekening"
                                                placeholder="No. Rekening"
                                                name="no_rekening" required>
                                     </div>
                                     <div class="w-100 mb-1">
-                                        <label for="atas_nama" class="form-label" style="color: #535961; font-size: 18px">Atas Nama</label>
+                                        <label for="atas_nama" class="form-label"
+                                               style="color: #535961; font-size: 18px">Atas Nama</label>
                                         <input type="text" class="form-control-file" id="atas_nama"
                                                placeholder="Atas Nama"
                                                name="atas_nama" required>
@@ -247,7 +267,8 @@
                                 @elseif($data->status == 'selesai')
                                     <p class="font-weight-bold"
                                        style="color: #535961; font-size: 14px; text-align: justify">
-                                        NB: Proses Reservasi anda telah selesai. Terima kasih telah menggunakan jasa kami.
+                                        NB: Proses Reservasi anda telah selesai. Terima kasih telah menggunakan jasa
+                                        kami.
                                     </p>
                                 @endif
                             @endif
